@@ -1,0 +1,25 @@
+{
+  "name": "streamingService",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PireIre/streamingService.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PireIre/streamingService/issues"
+  },
+  "homepage": "https://github.com/PireIre/streamingService#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "joi": "^17.5.0",
+    "nodemon": "^2.0.15"
+  }
+}
