@@ -19,7 +19,7 @@
   "homepage": "https://github.com/PireIre/streamingService#readme",
   "dependencies": {
     "express": "^4.17.2",
-    "joi": "^17.5.0",
+    "joi": "^13.1.0",
     "nodemon": "^2.0.15"
   }
 }
