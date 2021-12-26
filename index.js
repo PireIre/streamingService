@@ -4,9 +4,14 @@ const genres = require("./routes/genres")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
 const authenticate = require("./authentication")
-
+const morgan = require("morgan")
 
 const app = express();
+
+if(app.get("env") === "development"){
+    console.log("Morgan is enabled")
+    app.use(morgan('tiny'))
+}
 
 app.use(express.json());
 app.use(express.static('public'));
