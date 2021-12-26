@@ -9,6 +9,8 @@ const authenticate = require("./authentication")
 const app = express();
 
 app.use(express.json());
+app.use(express.static('public'));
+
 
 //custom middleware for loggin and authenticating
 app.use(authenticate);
