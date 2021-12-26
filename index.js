@@ -1,4 +1,5 @@
 //Dependencies
+const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres")
 const homepage = require("./routes/homepage")
@@ -7,6 +8,11 @@ const authenticate = require("./authentication")
 const morgan = require("morgan")
 
 const app = express();
+
+//Configuration
+console.log(config.get("name"))
+console.log(config.get("mail"))
+
 
 if(app.get("env") === "development"){
     console.log("Morgan is enabled")
