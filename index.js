@@ -6,16 +6,18 @@ const homepage = require("./routes/homepage")
 const logger = require("./logger")
 const authenticate = require("./authentication")
 const morgan = require("morgan")
+const debug = require("debug")("app:startup")
+
 
 const app = express();
 
 //Configuration
-console.log(config.get("name"))
-console.log(config.get("mail"))
+debug(config.get("name"))
+debug(config.get("mail"))
 
 
 if(app.get("env") === "development"){
-    console.log("Morgan is enabled")
+    debug("Morgan is enabled")
     app.use(morgan('tiny'))
 }
 
@@ -38,5 +40,5 @@ app.use("/api/genres", genres)
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`)
+    debug(`listening on port ${PORT}`)
 })
