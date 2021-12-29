@@ -2,6 +2,7 @@
 const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres")
+const users = require("./routes/users")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
 const authenticate = require("./authentication")
@@ -39,6 +40,9 @@ app.use("/", homepage)
 
 //Load genres router
 app.use("/api/genres", genres)
+
+//Load users router
+app.use("/api/users", users)
 
 // PORT
 const PORT = process.env.PORT || 4000;
