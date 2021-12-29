@@ -7,7 +7,11 @@ const logger = require("./logger")
 const authenticate = require("./authentication")
 const morgan = require("morgan")
 const debug = require("debug")("app:startup")
+const mongoose = require("mongoose");
 
+mongoose.connect("mongodb://localhost/streamingService")
+    .then(() => console.log("connected for mongoDB"))
+    .catch(err => console.log("could not connect to mongoDB" + err))
 
 const app = express();
 
