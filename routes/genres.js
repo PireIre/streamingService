@@ -1,32 +1,8 @@
 //Dependencies
 const express = require("express");
 const router = express.Router();
-const Joi = require("joi");
-const mongoose = require("mongoose");
+const { Genre, validate } = require("../modules/genres")
 
-const genreSchema = new mongoose.Schema({
-    genre: {
-        type: String,
-        required: true,
-        maxlength: 5,
-        maxlength: 50
-    }
-})
-
-const Genre = mongoose.model("Genre", genreSchema);
-
-// validate genre request
-validateGenreRequest = (genre) => {
-
-    // Define schema/format for the genre
-    // Genre field is required and needs to be a string
-    const schema = {
-        genre: Joi.string().required()
-    }
-
-    // returns boolean
-    return Joi.validate(genre, schema);
-}
 
 //GET all genres
 router.get("/", async (req, res) => {
@@ -50,7 +26,7 @@ router.get("/:id", async (req, res) => {
 
 //POST one genre
 router.post("/", async (req, res) => {
-    const { error } = validateGenreRequest(req.body);
+    const { error } = validate(req.body);
 
     if (error) return res.status(404).send(error.details[0].message);
 
@@ -63,7 +39,7 @@ router.post("/", async (req, res) => {
 //PUT one genre
 router.put("/:id", async (req, res) => {
     //Validate if request Body is allowed
-    const { error } = validateGenreRequest(req.body);
+    const { error } = validate(req.body);
     if (error) return res.status(404).send(error.details[0].message);
 
     // FindID & Update Genre

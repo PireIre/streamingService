@@ -1,40 +1,7 @@
 //Dependencies
 const express = require("express");
 const router = express.Router();
-const Joi = require("joi");
-const mongoose = require("mongoose");
-
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        maxlength: 2,
-        maxlength: 50
-    },
-    isGold: {
-        type: Boolean,
-        default: true,
-    },
-    phone: {
-        type: String,
-        required: true,
-        maxlength: 5,
-        maxlength: 50
-    },
-})
-
-const User = mongoose.model("User", userSchema);
-
-validateUserSchema = (user) => {
-    
-    const schema = {
-        name: Joi.string().required().min(2).max(50),
-        phone: Joi.string().required().min(5).max(50),
-        isGold: Joi.boolean()
-    }
-
-    return Joi.validate(user, schema);
-}
+const { User, validate } = require("../modules/users")
 
 router.get("/", async (req, res) => {
     const users = await User
@@ -53,7 +20,7 @@ router.get("/:id", async (req, res) => {
 
 
 router.post("/", async(req, res) => {
-    const { error } = validateUserSchema(req.body);
+    const { error } = validate(req.body);
 
     if (error) return res.status(404).send(error.details[0].message);
 
@@ -68,7 +35,7 @@ router.post("/", async(req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-    const { error } = validateUserSchema(req.body);
+    const { error } = validate(req.body);
     if (error) return res.status(404).send(error.details[0].message);
 
     const user = await User
