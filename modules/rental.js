@@ -1,4 +1,5 @@
 const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
 
 const rentalSchema = new mongoose.Schema({
@@ -60,8 +61,8 @@ const Rental = mongoose.model("Rental", rentalSchema);
 validateRentalRequest = (rental) => {
 
     const schema = {
-        customerId: Joi.string().required(),
-        movieId: Joi.string().required(),
+        customerId: Joi.objectId().required(),
+        movieId: Joi.objectId().required(),
     }
 
     // returns boolean
