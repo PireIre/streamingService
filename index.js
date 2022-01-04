@@ -2,6 +2,7 @@
 const config = require("config");
 const express = require("express");
 const genres = require("./routes/genres")
+const movies = require("./routes/movies")
 const users = require("./routes/users")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
@@ -43,6 +44,10 @@ app.use("/api/genres", genres)
 
 //Load users router
 app.use("/api/users", users)
+
+//Load movies router
+app.use("/api/movies", movies)
+
 
 // PORT
 const PORT = process.env.PORT || 4000;
