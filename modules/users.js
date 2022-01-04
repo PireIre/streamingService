@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        maxlength: 2,
+        minlength: 2,
         maxlength: 50
     },
     isGold: {
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        maxlength: 5,
+        minlength: 5,
         maxlength: 50
     },
 })

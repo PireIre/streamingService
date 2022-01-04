@@ -5,7 +5,7 @@ const genreSchema = new mongoose.Schema({
     genre: {
         type: String,
         required: true,
-        maxlength: 5,
+        minlength: 5,
         maxlength: 50
     }
 })
@@ -26,4 +26,5 @@ validateGenreRequest = (genre) => {
 }
 
 exports.Genre = Genre;
+exports.genreSchema = genreSchema;
 exports.validate = validateGenreRequest;
