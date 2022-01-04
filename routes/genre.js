@@ -1,7 +1,7 @@
 //Dependencies
 const express = require("express");
 const router = express.Router();
-const { Genre, validate } = require("../modules/genres")
+const { Genre, validate } = require("../modules/genre")
 
 
 //GET all genres

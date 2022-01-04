@@ -1,8 +1,8 @@
 //Dependencies
 const express = require("express");
 const router = express.Router();
-const { Movie, validate } = require("../modules/movies");
-const { Genre } = require("../modules/genres")
+const { Movie, validate } = require("../modules/movie");
+const { Genre } = require("../modules/genre")
 
 
 

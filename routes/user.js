@@ -1,7 +1,7 @@
 //Dependencies
 const express = require("express");
 const router = express.Router();
-const { User, validate } = require("../modules/users")
+const { User, validate } = require("../modules/user")
 
 router.get("/", async (req, res) => {
     const users = await User

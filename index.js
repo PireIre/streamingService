@@ -1,9 +1,9 @@
 //Dependencies
 const config = require("config");
 const express = require("express");
-const genres = require("./routes/genres")
-const movies = require("./routes/movies")
-const users = require("./routes/users")
+const genres = require("./routes/genre")
+const movies = require("./routes/movie")
+const users = require("./routes/user")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
 const authenticate = require("./authentication")

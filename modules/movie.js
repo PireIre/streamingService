@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const number = require("joi/lib/types/number");
 const mongoose = require("mongoose");
-const { genreSchema } = require("./genres")
+const { genreSchema } = require("./genre")
 
 
 const movieSchema = new mongoose.Schema({
