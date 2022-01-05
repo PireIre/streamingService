@@ -4,7 +4,7 @@ const express = require("express");
 const genres = require("./routes/genre")
 const movies = require("./routes/movie")
 const rentals = require("./routes/rental")
-const users = require("./routes/user")
+const customers = require("./routes/customer")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
 const authenticate = require("./authentication")
@@ -45,8 +45,8 @@ app.use("/", homepage)
 //Load genres router
 app.use("/api/genres", genres)
 
-//Load users router
-app.use("/api/users", users)
+//Load customers router
+app.use("/api/customers", customers)
 
 //Load movies router
 app.use("/api/movies", movies)

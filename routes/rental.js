@@ -4,7 +4,7 @@ const Fawn = require("fawn");
 const router = express.Router();
 const { Rental, validate } = require("../modules/rental")
 const { Movie } = require("../modules/movie")
-const { User } = require("../modules/user")
+const { Customer } = require("../modules/customer")
 const mongoose = require("mongoose");
 
 Fawn.init(mongoose);
@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const customer = await User.findById(req.body.customerId);
+    const customer = await Customer.findById(req.body.customerId);
     if (!customer) return res.status(404).send("Customer Id does not exist")
 
     const movie = await Movie.findById(req.body.movieId);

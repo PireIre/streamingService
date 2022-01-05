@@ -1,21 +1,21 @@
 //Dependencies
 const express = require("express");
 const router = express.Router();
-const { User, validate } = require("../modules/user")
+const { Customer, validate } = require("../modules/customer")
 
 router.get("/", async (req, res) => {
-    const users = await User
+    const customers = await Customer
         .find() 
 
-    res.send(users)
+    res.send(customers)
 });
 
 router.get("/:id", async (req, res) => {
-    const user = await User
+    const customer = await Customer
         .findById(req.params.id)
 
-    if (!user) return res.status(404).send("404 - User ID not found")
-    res.send(user);
+    if (!customer) return res.status(404).send("404 - Customer ID not found")
+    res.send(customer);
 });
 
 
@@ -24,39 +24,39 @@ router.post("/", async(req, res) => {
 
     if (error) return res.status(404).send(error.details[0].message);
 
-    let user = new User(
+    let customer = new Customer(
         { name: req.body.name,
           isGold: req.body.isGold,
           phone: req.body.phone })
 
-    user = await user.save();
+    customer = await customer.save();
 
-    res.send(user);
+    res.send(customer);
 });
 
 router.put("/:id", async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(404).send(error.details[0].message);
 
-    const user = await User
+    const customer = await Customer
         .findByIdAndUpdate(req.params.id, { 
             name: req.body.name,
             isGold: req.body.isGold,
             phone: req.body.phone },
          {new: true}) //new: true returns an updated instance
 
-    if (!user) return res.status(404).send("404 - User ID not found")
+    if (!customer) return res.status(404).send("404 - Customer ID not found")
 
-    res.send(user);
+    res.send(customer);
 });
 
 router.delete("/:id", async(req, res) => {
-    const user = await User
+    const customer = await Customer
         .findByIdAndRemove(req.params.id);
 
-    if (!user) return res.status(404).send("404 - User ID not found")
+    if (!customer) return res.status(404).send("404 - Customer ID not found")
 
-    res.send(user);
+    res.send(customer);
 });
 
 module.exports = router;
