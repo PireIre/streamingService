@@ -1,4 +1,5 @@
 //Dependencies
+const auth = require("../middleware/auth")
 const express = require("express");
 const router = express.Router();
 const { Genre, validate } = require("../modules/genre")
@@ -25,7 +26,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //POST one genre
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     const { error } = validate(req.body);
 
     if (error) return res.status(404).send(error.details[0].message);
@@ -37,7 +38,7 @@ router.post("/", async (req, res) => {
 });
 
 //PUT one genre
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     //Validate if request Body is allowed
     const { error } = validate(req.body);
     if (error) return res.status(404).send(error.details[0].message);
@@ -53,7 +54,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //DELETE one genre
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", auth, async(req, res) => {
     // Validate if ID exists
     // Validate if ID exists && Update Genre
     const genre = await Genre
