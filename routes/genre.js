@@ -1,5 +1,6 @@
 //Dependencies
 const auth = require("../middleware/auth")
+const admin = require("../middleware/admin")
 const express = require("express");
 const router = express.Router();
 const { Genre, validate } = require("../modules/genre")
@@ -54,7 +55,7 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 //DELETE one genre
-router.delete("/:id", auth, async(req, res) => {
+router.delete("/:id", [auth, admin], async(req, res) => {
     // Validate if ID exists
     // Validate if ID exists && Update Genre
     const genre = await Genre

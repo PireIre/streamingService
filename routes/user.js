@@ -3,6 +3,7 @@ const _ = require("lodash");
 const router = express.Router();
 const { User, validate } = require("../modules/user")
 const bcrypt = require("bcrypt");
+const auth = require("../middleware/auth")
 
 router.get("/", async (req, res)=> {
   const users = await User.find();
@@ -10,11 +11,8 @@ router.get("/", async (req, res)=> {
   res.send(users);
 })
 
-router.get("/:id", async (req, res)=> {
-  const user = await User.findById(req.params.id);
-
-  if (!user) return res.status(404).send("404 - User ID not found")
-
+router.get("/me", auth,  async (req, res)=> {
+  const user = await User.findById(req.user._id).select("-password");
   res.send(user);
 })
 
@@ -26,14 +24,14 @@ router.post("/", async (req, res)=> {
   let user = await User.findOne({ email: req.body.email });
   if(user) return res.status(400).send("User already exists in the database")
 
-  user = new User (_.pick(req.body, ["name", "email", "password"]))
+  user = new User (_.pick(req.body, ["name", "email", "password", "isAdmin"]))
   const salt = await bcrypt.genSalt(10)
   user.password = await bcrypt.hash(user.password, salt)
 
   await user.save(); 
   
   const token = user.generateAuthenticationToken();
-  res.header("x-auth-token", token).send(_.pick(user, ["_id", "name", "email"]));
+  res.header("x-auth-token", token).send(_.pick(user, ["_id", "name", "email", "isAdmin"]));
 })
 
 module.exports = router;
