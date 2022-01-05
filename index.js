@@ -11,6 +11,8 @@ const authenticate = require("./authentication")
 const morgan = require("morgan")
 const debug = require("debug")("app:startup")
 const mongoose = require("mongoose");
+const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 
 mongoose.connect("mongodb://localhost/streamingService")
     .then(() => console.log("connected for mongoDB"))

@@ -39,7 +39,7 @@ validateGenreRequest = (movie) => {
     // Movie field is required and needs to be a string
     const schema = {
         title: Joi.string().required(),
-        genreId: Joi.string().required(),
+        genreId: Joi.objectId().required(),
         numberInStock: Joi.number().required().min(0).max(250),
         dailyRentalRate: Joi.number().required().min(0).max(250)
     }
