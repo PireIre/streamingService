@@ -1,4 +1,5 @@
 const express = require("express");
+const _ = require("lodash");
 const router = express.Router();
 const { User, validate } = require("../modules/user")
 
@@ -24,15 +25,11 @@ router.post("/", async (req, res)=> {
   let user = await User.findOne({ email: req.body.email });
   if(user) return res.status(400).send("User already exists in the database")
 
-  user = new User ({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password
-  })
+  user = new User (_.pick(req.body, ["name", "email", "password"]))
 
   await user.save(); 
     
-  res.send(user);
+  res.send(_.pick(user, ["_id", "name", "email"]));
 })
 
 module.exports = router;
