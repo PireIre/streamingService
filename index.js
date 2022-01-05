@@ -5,6 +5,7 @@ const genres = require("./routes/genre")
 const users = require("./routes/user")
 const movies = require("./routes/movie")
 const rentals = require("./routes/rental")
+const auth = require("./routes/auth")
 const customers = require("./routes/customer")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
@@ -25,6 +26,10 @@ const app = express();
 debug(config.get("name"))
 debug(config.get("mail"))
 
+if(!config.get("jwtPrivateKey")) {
+    debug("FATAL ERROR: jwtPrivateKey is not defined");
+    process.exit(1);
+}
 
 if(app.get("env") === "development"){
     debug("Morgan is enabled")
@@ -57,6 +62,9 @@ app.use("/api/movies", movies)
 
 //Load movies router
 app.use("/api/rentals", rentals)
+
+//Load movies router
+app.use("/api/auth", auth)
 
 
 // PORT
