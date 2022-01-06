@@ -9,7 +9,6 @@ const auth = require("./routes/auth")
 const customers = require("./routes/customers")
 const homepage = require("./routes/homepage")
 const logger = require("./logger")
-const authenticate = require("./authentication")
 const morgan = require("morgan")
 const debug = require("debug")("app:startup")
 const mongoose = require("mongoose");
@@ -41,7 +40,6 @@ app.use(express.static('public'));
 
 
 //custom middleware for loggin and authenticating
-app.use(authenticate);
 app.use(logger);
 
 
